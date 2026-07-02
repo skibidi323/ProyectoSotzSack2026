@@ -282,7 +282,7 @@ action="<?php echo isset($_SESSION['usuario']) ? 'actualizar.php' : 'conexion.ph
 method="POST">
 <?php if(isset($_SESSION['usuario'])): ?>
     <p style="color:red; font-size:14px;">
-        ⚠️ El correo y la contraseña no pueden ser modificar.
+        ⚠️ El correo y la contraseña no se pueden modificar.
     </p>
 <?php endif; ?>
 

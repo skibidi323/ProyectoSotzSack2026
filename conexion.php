@@ -13,7 +13,7 @@ $correo = $_POST['correo'];
 $localidad = $_POST['localidad'];
 $direccion = $_POST['direccion'];
 
-// 🔐 Encriptar contraseña
+// 🔐 Encripta la contraseña
 $clave = password_hash($_POST['clave'], PASSWORD_DEFAULT);
 
 // 📝 Insertar

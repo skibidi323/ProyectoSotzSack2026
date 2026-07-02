@@ -16,7 +16,7 @@ if(pg_num_rows($result) > 0){
 
     $user = pg_fetch_assoc($result);
 
-    // 🔐 Verificar contraseña
+    // 🔐 Verifica contraseña
     if(password_verify($password, $user['clave'])){
         
         $_SESSION['usuario'] = $user['nombre'];
