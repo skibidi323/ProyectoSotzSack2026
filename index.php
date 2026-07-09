@@ -194,7 +194,7 @@ footer{
     <img src="main-logo2.png" width="200" >
 
     <!-- 🔐 Botón login -->
-    <div class="icons" style="display: flex; gap: 15px;"> <button class="btn-login" onclick="openCart()">
+    <div class="icons" style="display: flex; gap: 20px;"> <button class="btn-login" onclick="openCart()">
     <span class="icon">🛒</span>
     Carrito
 </button>
@@ -255,7 +255,7 @@ while ($row = pg_fetch_assoc($result)) {
 
         <!-- 🛒 Botón agregar -->
         <button onclick="agregarAlCarrito('.$row['id'].', \''.$row['nombre'].'\', '.$row['precio'].', '.$row['stock'].')">
-            Agregar al carrito
+            Agregar el producto al carrito
         </button>
 
     </div>';
@@ -416,7 +416,7 @@ function closeCart(){
 function actualizarCarrito(){
     let contenedor = document.getElementById("cartItems");
     let total = document.getElementById("totalCarrito");
-    let totalPago = document.getElementById("totalCarritoPago");
+   ;
 
     contenedor.innerHTML = "";
     let suma = 0;
@@ -443,7 +443,7 @@ function actualizarCarrito(){
     }
 
     total.innerText = "Total: $" + suma;
-    totalPago.innerText = "Total: $" + suma;
+   
 }
 function comprar(){
     if(carrito.length === 0){
