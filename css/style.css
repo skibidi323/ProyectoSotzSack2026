@@ -231,3 +231,50 @@ img {
     background: #f5f5f5;
     padding: 20px;
 }
+.alias-texto{
+    margin-top:15px;
+    margin-bottom:10px;
+    font-size:15px;
+    color:#c52121;
+}
+
+.alias-box{
+    background:#f0f0f0;
+    border:2px dashed #1e90ff;
+    border-radius:8px;
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    color:#0a3d62;
+    margin-bottom:20px;
+}
+
+.confirmacion-pago{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+.confirmacion-pago input{
+    width:18px;
+    height:18px;
+}
+
+.mensaje-compra{
+    font-size:14px;
+    color:#555;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+.cart-container{
+    background:white;
+    width:380px;
+    height:100%;
+    padding:20px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+}

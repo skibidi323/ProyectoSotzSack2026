@@ -160,28 +160,27 @@ footer{
     <div class="cart-container">
 
         <!-- 🛒 CARRITO -->
-        
-            <button class="btn-close" onclick="closeCart()">← Continuar compra</button>
-            <div id="cartItems"></div>
-        <!-- 💳 FORMULARIO -->
-        <div class="cart-right">
+         <button class="btn-close" onclick="closeCart()">← Continuar compra</button>
+        <div class="alias-box">
+    napa.todo.edita.mp
+</div>
 
-            <h3>Datos de pago</h3>
+<label class="confirmacion-pago">
+    <input type="checkbox" required>
+    Confirmo que realicé el pago.
+</label>
 
-            <input type="text" placeholder="Nombre del titular" required>
+<p class="mensaje-compra">
+    Una vez confirmado el pago, recibirás en tu correo electrónico la confirmación de tu compra junto con los datos del envío.
+</p>
 
-            <input type="text" placeholder="Número de tarjeta" maxlength="16" required>
+<h2 id="totalCarrito">Total: $0</h2>
 
-            <div style="display:flex; gap:10px;">
-                <input type="text" placeholder="MM/AA" style="width:50%;" required>
-                <input type="text" placeholder="CVV" style="width:50%;" required>
-            </div>
-
-            <h2 id="totalCarrito">Total: $0</h2>
-
-            <button class="btn-comprar" onclick="comprar()">Comprar</button>
-
-        </div>
+<button class="btn-comprar" onclick="comprar()">
+    Comprar ahora
+</button>
+            
+            
 
     </div> <!-- 🔚 FIN cart-container -->
 
