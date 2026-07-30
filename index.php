@@ -193,7 +193,7 @@ footer{
     <img src="main-logo2.png" width="200" >
 
     <!-- 🔐 Botón login -->
-    <div class="icons" style="display: flex; gap: 20px;"> <button class="btn-login" onclick="openCart()">
+    <div class="icons" style="display: flex; gap: 5px;"> <button class="btn-login" onclick="openCart()">
     <span class="icon">🛒</span>
     Carrito
 </button>
