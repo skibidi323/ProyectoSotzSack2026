@@ -278,3 +278,24 @@ img {
     display:flex;
     flex-direction:column;
 }
+.qr-box{
+    background:#f0f0f0;
+    border:2px dashed #1e90ff;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.qr-box p{
+    font-size:16px;
+    font-weight:bold;
+    color:#0a3d62;
+    margin-bottom:15px;
+}
+
+.qr-box img{
+    width:220px;
+    height:220px;
+    object-fit:contain;
+}
