@@ -1237,6 +1237,8 @@ agrupados[p.id]={
 
 id:p.id,
 
+nombre:p.nombre,
+
 precio:p.precio,
 
 cantidad:1

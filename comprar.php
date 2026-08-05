@@ -34,18 +34,20 @@ $compra_id=$compra["id"];
 
 foreach($datos as $p){
 
-    pg_query($conn,"
-    INSERT INTO detalle_compra
-    (compra_id,producto_id,cantidad,precio)
+    $nombre = pg_escape_string($conn, $p["nombre"]);
 
-    VALUES(
-    $compra_id,
-    {$p["id"]},
-    {$p["cantidad"]},
-    {$p["precio"]}
-    )
-    ");
+pg_query($conn,"
+INSERT INTO detalle_compra
+(compra_id,producto_id,nombre_producto,cantidad,precio)
 
+VALUES(
+$compra_id,
+{$p["id"]},
+'$nombre',
+{$p["cantidad"]},
+{$p["precio"]}
+)
+");
     pg_query($conn,"
     UPDATE productos
     SET stock=stock-{$p["cantidad"]}
