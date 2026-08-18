@@ -796,7 +796,7 @@ Cerrar
 <script>
 
 
-let carrito=[];
+let carrito = [];
 
 
 
@@ -806,42 +806,53 @@ AGREGAR PRODUCTO
 ********************************/
 
 
-function agregarAlCarrito(id,nombre,precio,stock){
+function agregarAlCarrito(id, nombre, precio, stock){
 
+    fetch("agregar_carrito.php", {
 
-let cantidad=carrito.filter(
-p=>p.id===id
-).length;
+        method: "POST",
 
+        headers: {
+            "Content-Type": "application/json"
+        },
 
+        body: JSON.stringify({
 
-if(cantidad>=stock){
+            producto_id: id
 
-alert(
-"No hay más stock disponible"
-);
+        })
 
-return;
+    })
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        if(data.ok){
+
+            cargarCarrito();
+
+            alert("Producto agregado al carrito");
+
+        }else{
+
+            alert(data.mensaje);
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert("Ocurrió un error al agregar el producto");
+
+    });
 
 }
 
 
-
-carrito.push({
-
-id:id,
-
-nombre:nombre,
-
-precio:Number(precio)
-
-});
-
-
-actualizarCarrito();
-
-
-}
 
 
 
@@ -1006,14 +1017,40 @@ CARRITO MODAL
 
 function openCart(){
 
-document.getElementById(
-"cartModal"
-).style.display="flex";
+    document.getElementById(
+        "cartModal"
+    ).style.display="flex";
 
-
-actualizarCarrito();
+    cargarCarrito();
 
 }
+
+function cargarCarrito(){
+
+    fetch("cargar_carrito.php")
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        carrito = data;
+
+        actualizarCarrito();
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Error cargando carrito:",
+            error
+        );
+
+    });
+
+} 
+
+
 
 
 
@@ -1079,60 +1116,52 @@ ACTUALIZAR CARRITO
 
 function actualizarCarrito(){
 
+    let contenedor = document.getElementById("cartItems");
+    let total = document.getElementById("totalCarrito");
 
-let contenedor=document.getElementById(
-"cartItems"
-);
+    contenedor.innerHTML = "";
 
+    let suma = 0;
 
-let total=document.getElementById(
-"totalCarrito"
-);
+    carrito.forEach(p => {
 
+        let cantidad = Number(p.cantidad);
+        let precio = Number(p.precio);
 
+        let subtotal = precio * cantidad;
 
-contenedor.innerHTML="";
+        suma += subtotal;
 
+        contenedor.innerHTML += `
+            <div style="
+                background:#f5f5f5;
+                padding:10px;
+                margin:10px;
+                border-radius:10px;
+            ">
 
-let suma=0;
+                <b>${p.nombre}</b>
 
+                <br>
 
-let agrupados={};
+                Cantidad: ${cantidad}
 
+                <br>
 
+                Precio: $${precio}
 
+                <br>
 
-carrito.forEach(p=>{
+                Subtotal: $${subtotal}
 
+            </div>
+        `;
 
-if(!agrupados[p.id]){
+    });
 
-
-agrupados[p.id]={
-
-id:p.id,
-
-nombre:p.nombre,
-
-precio:p.precio,
-
-cantidad:1
-
-};
-
-
-}else{
-
-
-agrupados[p.id].cantidad++;
-
+    total.innerText = "Total: $" + suma;
 
 }
-
-
-
-});
-
 
 
 
@@ -1345,7 +1374,7 @@ alert(resultado);
 
 
 
-
+cargarCarrito();
 
 
 </script>
