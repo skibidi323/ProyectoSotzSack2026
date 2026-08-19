@@ -299,3 +299,18 @@ img {
     height:220px;
     object-fit:contain;
 }
+.btn-vaciar{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.btn-vaciar:hover{
+    background:#b02a37;
+}

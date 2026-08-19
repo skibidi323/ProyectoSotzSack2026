@@ -308,17 +308,20 @@ Una vez confirmado el pago, recibirás en tu correo electrónico la confirmació
 
 
 <h2 id="totalCarrito">
-
-Total: $0
-
+    Total: $0
 </h2>
-
-
 
 <button class="btn-comprar"
 onclick="comprar()">
 
 Comprar ahora
+
+</button>
+
+<button class="btn-vaciar"
+onclick="vaciarCarrito()">
+
+🗑️ Vaciar carrito
 
 </button>
 
@@ -1166,60 +1169,7 @@ function actualizarCarrito(){
 
 
 
-Object.values(agrupados).forEach(p=>{
 
-
-let subtotal=
-p.precio*p.cantidad;
-
-
-suma+=subtotal;
-
-
-
-contenedor.innerHTML+=`
-
-<div style="
-background:#f5f5f5;
-padding:10px;
-margin:10px;
-border-radius:10px;
-">
-
-
-<b>${p.nombre}</b>
-
-
-<br>
-
-
-Cantidad:
-${p.cantidad}
-
-
-<br>
-
-
-Precio:
-$${subtotal}
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-total.innerText=
-"Total: $"+suma;
-
-
-
-}
 
 
 
@@ -1376,7 +1326,64 @@ alert(resultado);
 
 cargarCarrito();
 
+function vaciarCarrito(){
 
+    if(carrito.length === 0){
+
+        alert("El carrito ya está vacío");
+
+        return;
+
+    }
+
+
+    let confirmar = confirm(
+        "¿Seguro que querés vaciar el carrito?"
+    );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    fetch("vaciar_carrito.php", {
+
+        method: "POST"
+
+    })
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        if(data.ok){
+
+            carrito = [];
+
+            actualizarCarrito();
+
+            alert("Carrito vaciado correctamente");
+
+        }else{
+
+            alert(data.mensaje);
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert("Ocurrió un error al vaciar el carrito");
+
+    });
+
+}
 </script>
 
 
