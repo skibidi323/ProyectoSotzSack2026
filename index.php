@@ -1183,142 +1183,104 @@ REALIZAR COMPRA
 
 function comprar(){
 
+    if(carrito.length === 0){
 
+        alert("El carrito está vacío");
 
-if(carrito.length===0){
+        return;
 
+    }
 
-alert(
-"El carrito está vacío"
-);
+    let agrupados = {};
 
+    carrito.forEach(p => {
 
-return;
+        if(!agrupados[p.id]){
 
+            agrupados[p.id] = {
 
-}
+                id: p.id,
+                nombre: p.nombre,
+                precio: p.precio,
+                cantidad: 1
 
+            };
 
+        }else{
 
+            agrupados[p.id].cantidad++;
 
-let agrupados={};
+        }
 
+    });
 
 
+    fetch("comprar.php", {
 
-carrito.forEach(p=>{
+        method: "POST",
 
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-if(!agrupados[p.id]){
+        body: JSON.stringify(
+            Object.values(agrupados)
+        )
 
+    })
 
-agrupados[p.id]={
+    .then(res => res.text())
 
-id:p.id,
+    .then(resultado => {
 
-nombre:p.nombre,
+        if(resultado.trim() == "ok"){
 
-precio:p.precio,
+            // 🗑️ Vaciar el carrito de la base de datos
+            return fetch("vaciar_carrito.php", {
+                method: "POST"
+            });
 
-cantidad:1
+        }else{
 
-};
+            throw new Error(resultado);
 
+        }
 
-}else{
+    })
 
+    .then(res => res.json())
 
-agrupados[p.id].cantidad++;
+    .then(data => {
 
+        if(data.ok){
 
-}
+            // Vaciar también el carrito de JavaScript
+            carrito = [];
 
+            actualizarCarrito();
 
-});
+            alert("Compra realizada correctamente");
 
+            closeCart();
 
+            // Recargar para actualizar la página
+            location.reload();
 
+        }else{
 
+            alert(data.mensaje);
 
+        }
 
+    })
 
-fetch(
-"comprar.php",
-{
+    .catch(error => {
 
+        console.error(error);
 
-method:"POST",
+        alert("Ocurrió un error: " + error.message);
 
-
-headers:{
-
-
-"Content-Type":
-"application/json"
-
-
-},
-
-
-body:JSON.stringify(
-Object.values(agrupados)
-)
-
-
-}
-
-)
-
-
-
-
-
-.then(res=>res.text())
-
-
-
-.then(resultado=>{
-
-
-if(resultado.trim()=="ok"){
-
-
-
-alert(
-"Compra realizada correctamente"
-);
-
-
-
-carrito=[];
-
-
-
-actualizarCarrito();
-
-
-
-closeCart();
-
-
-
-location.reload();
-
-
-
-}else{
-
-
-alert(resultado);
-
-
-}
-
-
-
-});
-
-
+    });
 
 }
 
