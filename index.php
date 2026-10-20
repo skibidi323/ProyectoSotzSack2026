@@ -500,12 +500,11 @@ onerror="this.style.display=\'none\'">
 
 
 <p>
-'.$row['nombre'].'
+    '.$row['nombre'].'
 </p>
 
-
 <p>
-$'.$row['precio'].'
+    $'.number_format((float)$row['precio'], 0, ',', '.').'
 </p>
 
 
@@ -1151,18 +1150,21 @@ function actualizarCarrito(){
 
                 <br>
 
-                Precio: $${precio}
+                Precio: $${precio.toLocaleString('es-AR', {
+    maximumFractionDigits: 0
+})}
 
-                <br>
-
-                Subtotal: $${subtotal}
-
+Subtotal: $${subtotal.toLocaleString('es-AR', {
+    maximumFractionDigits: 0
+})}
             </div>
         `;
 
     });
 
-    total.innerText = "Total: $" + suma;
+   total.innerText = "Total: $" + suma.toLocaleString('es-AR', {
+    maximumFractionDigits: 0
+});
 
 }
 

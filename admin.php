@@ -892,17 +892,17 @@ $cantidadResultados = pg_num_rows($result);
 
                         <td class="precio">
 
-                            $
+    $
+    <?php
+    echo number_format(
+        (float)$row['total'],
+        0,
+        ',',
+        '.'
+    );
+    ?>
 
-                            <?php
-
-                            echo htmlspecialchars(
-                                $row['total']
-                            );
-
-                            ?>
-
-                        </td>
+</td>
 
 
                         <td class="fecha">
